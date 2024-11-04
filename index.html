@@ -14,7 +14,7 @@
         function sendAuthData() {
             const initDataRaw = window.Telegram.WebApp.initData || '';
             
-            fetch('http://127.0.0.1:8000/api/v1/losb/user', {
+            fetch('https://fb1d-62-4-34-209.ngrok-free.app/api/v1/losb/user', {
                 method: 'POST',
                 headers: {
                     'Authorization': `tma ${initDataRaw}`
