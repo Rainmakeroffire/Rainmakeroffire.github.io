@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram WebApp Auth Test</title>
+</head>
+<body>
+    <h1>Testing Telegram WebApp Authentication</h1>
+    <button onclick="sendAuthData()">Authenticate with Telegram</button>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        function sendAuthData() {
+            const initDataRaw = window.Telegram.WebApp.initData || '';
+            
+            fetch('https://your-server-url/api/your-auth-endpoint', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `tma ${initDataRaw}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Authentication successful!");
+                    console.log("User data:", data.user);
+                } else {
+                    alert("Authentication failed.");
+                    console.error("Error:", data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
