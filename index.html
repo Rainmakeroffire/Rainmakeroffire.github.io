@@ -20,17 +20,20 @@
                     'Authorization': `tma ${initDataRaw}`
                 }
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Authentication successful!");
-                    console.log("User data:", data.user);
-                } else {
-                    alert("Authentication failed.");
-                    console.error("Error:", data.error);
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Authentication failed");
                 }
+                return response.json();
             })
-            .catch(error => console.error('Error:', error));
+            .then(data => {
+                alert("Authentication successful!");
+                console.log("Protected data:", data);
+            })
+            .catch(error => {
+                alert("Authentication failed.");
+                console.error("Error:", error);
+            });
         }
     </script>
 </body>
